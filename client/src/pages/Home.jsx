@@ -4,7 +4,7 @@ import Header from "../components/nav/Header";
 const Home = () => {
   return (
     <>
-    <Header/>
+      <Header title="Bidoo" />
       <p>Home</p>
     </>
   );
