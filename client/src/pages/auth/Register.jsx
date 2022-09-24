@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { sendSignInLinkToEmail } from "firebase/auth";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 const Register = () => {
   const [email, setEmail] = useState("");
 
@@ -10,7 +10,7 @@ const Register = () => {
     e.preventDefault();
 
     const actionCodeSettings = {
-      url: "http://localhost:3000/Register/complete-register",
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
@@ -25,7 +25,7 @@ const Register = () => {
         const errorMessage = error.message;
         toast.error(
           `
-          Email missing`
+          Invalid Email `
         );
       });
   };
@@ -38,12 +38,13 @@ const Register = () => {
         className="form-control "
         value={email}
         onChange={(e) => {
+          // console.log(e.target);
           setEmail(e.target.value);
         }}
         autoFocus
       />
       <button type="submit" className="btn btn-raised btn-primary col-3">
-        Register
+        Submit
       </button>
     </form>
   );
@@ -53,7 +54,7 @@ const Register = () => {
         <div className="row ">
           <div className="col-md-6 offset-md-3">
             <h3>Register</h3>
-            <ToastContainer />
+
             {registerForm()}
           </div>
         </div>
