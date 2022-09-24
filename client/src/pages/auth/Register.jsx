@@ -23,10 +23,7 @@ const Register = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        toast.error(
-          `
-          Invalid Email `
-        );
+        toast.error(error.message);
       });
   };
 
